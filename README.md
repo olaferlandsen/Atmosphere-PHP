@@ -8,7 +8,7 @@ Atmosphere is designed to consume the least amount of resources and focus them i
 Currently there are several systems that use Atmosphere and have not presented problems of compatibility, security or performance, except specific cases that escape from the minimum standards of programming.
 
 ### What state this development?
-The development of this framework currently depends only on helium-3 Technologies, founded in Chile by Olaf Erlandsen, which has freed Atmosphere for the Internet developer community could improve the user experience.
+The development of this framework currently depends only on He-3 Technologies, founded in Chile by Olaf Erlandsen, which has freed Atmosphere for the Internet developer community could improve the user experience.
 
 ### What are the requirements of the framework?
 Atmosphere only requires PHP 6.6 or higher, in addition to Apache 2 mod_rewrite enabled.
