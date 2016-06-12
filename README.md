@@ -11,7 +11,7 @@ Currently there are several systems that use Atmosphere and have not presented p
 The development of this framework currently depends only on He-3 Technologies, founded in Chile by Olaf Erlandsen, which has freed Atmosphere for the Internet developer community could improve the user experience.
 
 ### What are the requirements of the framework?
-Atmosphere only requires PHP 6.6 or higher, in addition to Apache 2 mod_rewrite enabled.
+Atmosphere only requires `PHP 5.6` or higher, in addition to Apache 2 with mod_rewrite enabled.
 
 ### Is there any support?
 That's right! you can get FREE support by contacting via email, Skype or even opening a issue here on Github.
