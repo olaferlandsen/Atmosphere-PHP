@@ -1,0 +1,3 @@
+*.bak
+# Except this file
+!.gitignore
