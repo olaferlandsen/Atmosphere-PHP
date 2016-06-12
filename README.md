@@ -1,5 +1,25 @@
 ## Atmosphere a PHP Framework to create powerful experiences.
 
+### Getting started, too easy!
+
+Create you first application in `Atmosphere/applications/index/index.php`
+
+```php
+<?php
+namespace Atmosphere\Controller {
+    class index extends Controller {
+        public function _config()
+        {
+        }
+        public function index()
+        {
+            $this->responseCode(200);
+            echo 'Hello World!!';
+        }
+    }
+}
+```
+open in you browser `http://you-site.com/`.
 
 ### Why use Atmosphere?
 Atmosphere is designed to consume the least amount of resources and focus them in place and right time.
