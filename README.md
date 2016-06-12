@@ -24,15 +24,15 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
 
 ## Features
 
- - Magic Routes
- - Custom response codes
+ - [Magic Routes](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/URL-Friendly-and-Magic-Routes)
+ - [Custom response codes](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/Custom-Response-Codes)
  - Support to MySQL, MariaDB, PostgreSQL, SQLite, Oracle, etc
  - Support Template Engine(you can use Smarty, Dwoo, etc)
  - Custom typehint
  - Custom URL Friendly
  - Support global configuration
  - Debug tools!
- - Ideal to create own Rest applications!
+ - [Ideal to create own Rest applications!](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/How-to-create-a-simple-Rest-Application%3F)
 
 
 ## Default Libraries
