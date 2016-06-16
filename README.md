@@ -44,7 +44,7 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
 
 ## Features
 
- - [Magic Routes]()
+ - [Magic Routes](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/URL-Friendly-and-Magic-Routes#magic-routes)
  - [Custom response codes](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/URL-Friendly-and-Magic-Routes#magic-routes)
  - Support to MySQL, MariaDB, PostgreSQL, SQLite, Oracle, etc
  - Support Template Engine(you can use Smarty, Dwoo, etc)
