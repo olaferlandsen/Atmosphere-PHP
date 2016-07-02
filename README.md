@@ -55,7 +55,7 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
  - Support global configuration
  - Debug tools!
  - [Ideal to create own Rest applications!](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/How-to-create-a-simple-Rest-Application%3F)
-
+ - CSRF/XSRF, XSS and SQL injection Protection
 
 ## Default Libraries
  - Atmosphere\Database - Database class
