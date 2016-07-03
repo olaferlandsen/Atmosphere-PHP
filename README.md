@@ -46,6 +46,11 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
  - Debug
  - CSRF/XSRF, XSS and SQL injection Protection
 
+## Tutorials
+- How to create a simple REST API?
+- How to create my first simple application?
+- How to create CRUD model?
+
 ## Default Libraries
  - Atmosphere\Database - Database class
  - Atmosphere\Cache - Cache class
