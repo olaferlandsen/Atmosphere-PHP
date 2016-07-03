@@ -50,6 +50,8 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
 - How to create a simple REST API?
 - How to create my first simple application?
 - How to create CRUD model?
+- How to enable/disble Debugger?
+- How to enable/disable Routes?
 
 ## Default Libraries
  - Atmosphere\Database - Database class
