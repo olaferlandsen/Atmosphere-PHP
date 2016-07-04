@@ -43,14 +43,14 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
  - Support to MySQL, MariaDB, PostgreSQL, SQLite, Oracle, etc
  - Support Template Engine(you can use Smarty, Dwoo, etc)
  - [Custom URL Friendly](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/URL-Friendly-and-Magic-Routes)
- - Debug
+ - [Debug](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/Debugger)
  - CSRF/XSRF, XSS and SQL injection Protection
 
 ## Tutorials
 - How to create a simple REST API?
 - How to create my first simple application?
 - How to create CRUD model?
-- How to enable/disble Debugger?
+- [How to enable/disble Debugger?](https://github.com/olaferlandsen/Atmosphere-PHP/wiki/Debugger)
 - How to enable/disable Routes?
 
 ## Default Libraries
