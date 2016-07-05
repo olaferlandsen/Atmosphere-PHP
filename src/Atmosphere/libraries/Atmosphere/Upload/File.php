@@ -3,31 +3,20 @@ namespace Atmosphere\Upload {
     class File
     {
         /**
-        *   Version
-        *
-        *   @since      1.5
-        *   @version    1.0
-        */
-        const VERSION = "1.5";
-        /**
         *    Upload function name
         *    Remember:
         *        Default function: move_uploaded_file
         *        Native options:
-        *            - move_uploaded_file (Default and best option)
+        *            - move_uploaded_file (best)
         *            - copy
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        mixex
         */
-        private $upload_function = "move_uploaded_file";
+        private $upload_function = 'move_uploaded_file';
         /**
         *    Array with the information obtained from the
         *    variable $_FILES or $HTTP_POST_FILES.
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        array
         */
         private $file_array    = array();
@@ -35,11 +24,9 @@ namespace Atmosphere\Upload {
         *    If the file you are trying to upload already exists it will
         *    be overwritten if you set the variable to true.
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        boolean
         */
-        private $overwrite_file = false;
+        private $overwrite_file = true;
         /**
         *    Input element
         *    Example:
@@ -47,64 +34,48 @@ namespace Atmosphere\Upload {
         *    Result:
         *        FileUpload::$input = file
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        string
         */
         private $input;
         /**
         *    Path output
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        string
         */
         private $destination_directory;
         /**
         *    Output filename
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        string
         */
         private $filename;
         /**
-        *    Max file size
+        *    Max file size in bytes
         *
-        *    @since        1.0
-        *    @version    1.0
-        *    @var        float
+        *    @var        mixed
         */
-        private $max_file_size= 0.0;
+        private $max_file_size = 0;
         /**
         *    List of allowed mime types
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        array
         */
         private $allowed_mime_types = array();
         /**
         *    Callbacks
-        *
-        *    @since        1.0
-        *    @version    1.0
+        * 
         *    @var        array
         */
         private $callbacks = array("before" => null, "after" => null);
         /**
         *    File object
-        *
-        *    @since        1.0
-        *    @version    1.0
+        * 
         *    @var        object
         */
         private    $file;
         /**
         *    Helping mime types
         *
-        *    @since        1.0
-        *    @version    1.0
         *    @var        array
         */
         private $mime_helping = array('text'      =>    array('text/plain',),    
@@ -132,16 +103,11 @@ namespace Atmosphere\Upload {
                 'text/csv',
                 'application/csv',
                 'text/comma-separated-values',
-                
-            ),
-            'video'    =>    array(
             ),
         );
         /**
         *    Construct
         *
-        *    @since     0.1
-        *    @version   1.0.1
         *    @return    object
         *    @method    object    __construct
         */
@@ -149,21 +115,21 @@ namespace Atmosphere\Upload {
         {
             $this->file = array(
                 "status"                =>    false,    // True: success upload
-                "mime"                  =>    "",       // Empty string
-                "filename"              =>    "",       // Empty string
-                "original"              =>    "",       // Empty string
+                "mime"                  =>    '',       // Empty string
+                "filename"              =>    '',       // Empty string
+                "original"              =>    '',       // Empty string
                 "size"                  =>    0,        // 0 Bytes
-                "sizeFormated"          =>    "0B",     // 0 Bytes
-                "destination"           =>    "./",     // Default: ./
+                "sizeFormated"          =>    '0B',     // 0 Bytes
+                "destination"           =>    './',     // Default: ./
                 "allowed_mime_types"    =>    array(),  // Allowed mime types
                 "log"                   =>    array(),  // Logs
                 "error"                 =>    0,        // File error
             );
             
             // Change dir to current dir
-            $this->destination_directory = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+            $this->destination_directory = __DIR__ . DIRECTORY_SEPARATOR;
             chdir($this->destination_directory);
-            
+            d
             // Set file array
             if (isset($_FILES) AND is_array($_FILES)) {
                 $this->file_array = $_FILES;
@@ -177,8 +143,6 @@ namespace Atmosphere\Upload {
         *    Example:
         *        $object->setInput("file");
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     string      $input
         *    @return    boolean
         *    @method    boolean     setInput
@@ -199,8 +163,6 @@ namespace Atmosphere\Upload {
         *    Remember:
         *        Use %s to retrive file extension
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     string      $filename
         *    @return    boolean
         *    @method    boolean     setFilename
@@ -217,8 +179,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set automatic filename
         *
-        *    @since     1.0
-        *    @version   1.5
         *    @param     string      $extension
         *    @return    boolean
         *    @method    boolean     setAutoFilename
@@ -226,7 +186,15 @@ namespace Atmosphere\Upload {
         public function setAutoFilename()
         {
             $this->log("Automatic filename is enabled");
-            $this->filename = sha1(mt_rand(1, 9999).uniqid());
+            // Use UUID V4
+            $this->filename = sprintf(
+                '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+                mt_rand( 0, 0xffff ),
+                mt_rand( 0, 0x0fff ) | 0x4000,
+                mt_rand( 0, 0x3fff ) | 0x8000,
+                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+            );
             $this->filename .= time();
             $this->filename .= ".%s";
             $this->log("Filename set to %s", $this->filename);
@@ -235,8 +203,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set file size limit
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     integer     $file_size
         *    @return    boolean
         *    @method    boolean     setMaxFileSize
@@ -273,8 +239,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set array mime types
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     array       $mimes
         *    @return    boolean
         *    @method    boolean     setAllowedMimeTypes
@@ -291,8 +255,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set input callback
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     mixed       $callback
         *    @return    boolean
         *    @method    boolean     setCallbackInput
@@ -308,8 +270,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set output callback
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     mixed       $callback
         *    @return    boolean
         *    @method    boolean     setCallbackOutput
@@ -325,8 +285,6 @@ namespace Atmosphere\Upload {
         /**
         *    Append a mime type to allowed mime types
         *
-        *    @since     1.0
-        *    @version   1.0.1
         *    @param     string      $mime
         *    @return    boolean
         *    @method    boolean     setAllowMimeType
@@ -348,8 +306,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set allowed mime types from mime helping
         *
-        *    @since     1.0.1
-        *    @version   1.0.1
         *    @return    boolean
         *    @method    boolean    setMimeHelping
         */
@@ -368,8 +324,6 @@ namespace Atmosphere\Upload {
         *        1.- FileUpload::setUploadFunction("move_uploaded_file");
         *        2.- FileUpload::setUploadFunction("copy");
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     string      $mime
         *    @return    boolean
         *    @method    boolean     setUploadFunction
@@ -391,8 +345,6 @@ namespace Atmosphere\Upload {
         /**
         *    Clear allowed mime types cache
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @return    boolean
         *    @method    boolean    clearAllowedMimeTypes
         */
@@ -405,8 +357,6 @@ namespace Atmosphere\Upload {
         /**
         *    Set destination output
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     string      $destination_directory      Destination path
         *    @param     boolean     $create_if_not_exist
         *    @return    boolean
@@ -447,8 +397,6 @@ namespace Atmosphere\Upload {
         /**
         *    Check file exists
         *
-        *    @since      1.0
-        *    @version    1.0.1
         *    @param      string     $file_destination
         *    @return     boolean
         *    @method     boolean    fileExists
@@ -463,8 +411,6 @@ namespace Atmosphere\Upload {
         /**
         *    Check dir exists
         *
-        *    @since        1.0
-        *    @version    1.0.1
         *    @param      string     $path
         *    @return     boolean
         *    @method     boolean    dirExists
@@ -479,8 +425,6 @@ namespace Atmosphere\Upload {
         /**
         *    Check valid filename
         *
-        *    @since     1.0
-        *    @version   1.0.1
         *    @param     string      $filename
         *    @return    boolean
         *    @method    boolean     isFilename
@@ -494,8 +438,6 @@ namespace Atmosphere\Upload {
         *    Validate mime type with allowed mime types,
         *    but if allowed mime types is empty, this method return true
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @param     string      $mime
         *    @return    boolean
         *    @method    boolean     checkMimeType
@@ -510,20 +452,16 @@ namespace Atmosphere\Upload {
         /**
         *    Retrive status of upload
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @return    boolean
         *    @method    boolean    getStatus
         */
         public function getStatus()
         {
-            return $this->file["status"];
+            return $this->file['status'];
         }
         /**
         *    Check valid path
         *
-        *    @since        1.0
-        *    @version    1.0.1
         *    @param        string    $filename
         *    @return     boolean
         *    @method     boolean    isDirpath
@@ -542,8 +480,6 @@ namespace Atmosphere\Upload {
         /**
         *    Allow overwriting files
         *
-        *    @since      1.0
-        *    @version    1.0
         *    @return     boolean
         *    @method     boolean    allowOverwriting
         */
@@ -556,8 +492,6 @@ namespace Atmosphere\Upload {
         /**
         *    File info
         *
-        *    @since      1.0
-        *    @version    1.0
         *    @return     object
         *    @method     object    getInfo
         */
@@ -568,8 +502,6 @@ namespace Atmosphere\Upload {
         /**
         *    Upload file
         *
-        *    @since     1.0
-        *    @version   1.0.1
         *    @return    boolean
         *    @method    boolean    save
         */
@@ -582,27 +514,26 @@ namespace Atmosphere\Upload {
                     if (empty($this->filename)) {
                         $this->log(
                             "Using original filename %s",
-                            $this->file_array[$this->input]["name"]
+                            $this->file_array[$this->input]['name']
                         );
-                        $this->filename = $this->file_array[$this->input]["name"];
+                        $this->filename = $this->file_array[$this->input]['name'];
                     }
                     
-                    // Replace %s for extension in filename
-                    // Before: /[\w\d]*(.[\d\w]+)$/i
-                    // After: /^[\s[:alnum:]\-\_\.]*\.([\d\w]+)$/iu
-                    // Support unicode(utf-8) characters
-                    // Example: "???????.jpeg" is valid; "Zhongguó.jpeg" is valid; "Tønsberg.jpeg" is valid
-                    $extension = preg_replace(
-                        "/^[\p{L}\d\s\-\_\.\(\)]*\.([\d\w]+)$/iu",
-                        '$1',
-                        $this->file_array[$this->input]["name"]    
+                    $extension = pathinfo(
+                        $this->file_array[$this->input]['name'],
+                        PATHINFO_EXTENSION
                     );
                     $this->filename = sprintf($this->filename , $extension);
                     
-                    
-                    
                     // set file info
-                    $this->file["mime"]         = $this->file_array[$this->input]["type"];
+                    if (function_exists('finfo_open')) {
+                        $this->file["mime"]         = finfo_file(
+                            finfo_open(FILEINFO_MIME_TYPE),
+                            $this->file_array[$this->input]["tmp_name"]
+                        );
+                    } else {
+                        $this->file["mime"] = $this->file_array[$this->input]["type"];
+                    }
                     $this->file["tmp"]          = $this->file_array[$this->input]["tmp_name"];
                     $this->file["original"]     = $this->file_array[$this->input]["name"];
                     $this->file["size"]         = $this->file_array[$this->input]["size"];
@@ -679,8 +610,6 @@ namespace Atmosphere\Upload {
         /**
         *    Create log
         *
-        *    @since     1.0
-        *    @version   1.0
         *    @return    boolean
         *    @method    boolean    log
         */
@@ -693,8 +622,6 @@ namespace Atmosphere\Upload {
         /**
         *    File size for humans.
         *
-        *    @since      1.0
-        *    @version    1.0
         *    @param      integer    $bytes
         *    @param      integer    $precision
         *    @return     string
@@ -709,16 +636,14 @@ namespace Atmosphere\Upload {
         /**
         *    Convert human file size to bytes
         *
-        *    @since      1.0
-        *    @version    1.0.1
         *    @param      integer    $size
         *    @return     string
         *    @method     string     sizeInBytes
         */
         public function sizeInBytes($size)
         {
-            $unit = "B";
-            $units = array("B"=>0, "K"=>1, "M"=>2, "G"=>3);
+            $unit = 'B';
+            $units = array('B'=>0, 'K'=>1, 'M'=>2, 'G'=>3);
             $matches = array();
             preg_match("/(?<size>[\d\.]+)\s*(?<unit>b|k|m|g)?/i", $size, $matches);
             if (array_key_exists("unit", $matches)) {
