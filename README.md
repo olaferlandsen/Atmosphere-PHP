@@ -1,4 +1,4 @@
-[![Donate](https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TJZSNT5JQUXL)
+![Atmosphere PHP](https://raw.githubusercontent.com/olaferlandsen/Atmosphere-PHP/master/Atmosphere.png)
 
 ## Atmosphere a PHP Framework to create powerful experiences.
 
@@ -59,3 +59,6 @@ If you decide to contribute on a regular basis, I'll add your name to the list o
  - Atmosphere\Upload - Upload file class
  - Atmosphere\Utilities - Utilities
  - Smarty - Template Engine
+
+ 
+[![Donate](https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TJZSNT5JQUXL)
