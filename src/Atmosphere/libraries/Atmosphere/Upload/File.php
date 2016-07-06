@@ -292,7 +292,7 @@ namespace Atmosphere\Upload {
         public function setAllowMimeType($mime)
         {
             if (!empty($mime) AND is_string($mime)) {
-                if (preg_match("#^[-\w\+]+/[-\w\+]+$#", $mime)) {
+                if (preg_match('#^([\w.+-]+/[\w.+-]+)$#i', $mime)) {
                     $this->log("IMPORTANT! Mime %s enabled", $mime);
                     $this->allowed_mime_types[] = strtolower($mime);
                     $this->file["allowed_mime_types"][] = strtolower($mime);
