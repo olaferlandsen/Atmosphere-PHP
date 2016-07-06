@@ -129,7 +129,6 @@ namespace Atmosphere\Upload {
             // Change dir to current dir
             $this->destination_directory = __DIR__ . DIRECTORY_SEPARATOR;
             chdir($this->destination_directory);
-            d
             // Set file array
             if (isset($_FILES) AND is_array($_FILES)) {
                 $this->file_array = $_FILES;
