@@ -23,7 +23,7 @@ open in you browser `http://you-site.com/`.
 Atmosphere is designed to consume the least amount of resources and focus them in place and right time.
 
 ### What are the requirements of the framework?
- - PHP >= 5.5.9
+ - PHP 5.5+ and PHP7!
  - OpenSSL PHP Extension
  - PDO PHP Extension
  - Mbstring PHP Extension
